@@ -1,6 +1,86 @@
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
-local display = Player.DisplayName
+
+local localPlayer = Players.LocalPlayer
+local username = localPlayer.Name
+local userId = localPlayer.UserId
+local display = localPlayer.DisplayName
+local a = {
+    A = "7kT",
+    B = "yR9v",
+    C = "p4M",
+    D = "Lx8",
+    E = "3sNq",
+    F = "hJ62",
+    G = "9Vb",
+    H = "q5Fp",
+    I = "mX3",
+    J = "2Wz",
+    K = "8rD",
+    L = "fY4s",
+    M = "kP9",
+    N = "6Tq",
+    O = "vJ3m",
+    P = "s7G",
+    Q = "4nH",
+    R = "Zb8",
+    S = "x5L",
+    T = "d9K",
+    U = "3Fy",
+    V = "pR7",
+    W = "t2N",
+    X = "8Mq",
+    Y = "j6V",
+    Z = "wS3",
+    a = "5gH",
+    b = "k9T",
+    c = "2Rf",
+    d = "7Ym",
+    e = "vN4",
+    f = "8Ls",
+    g = "3qJ",
+    h = "pD6",
+    i = "x9F",
+    j = "4Bk",
+    k = "m7P",
+    l = "6Vh",
+    m = "9sG",
+    n = "J2y",
+    o = "8Tq",
+    p = "3Fb",
+    q = "k5N",
+    r = "7Xm",
+    s = "4Hj",
+    t = "9Lv",
+    u = "2Dp",
+    v = "6sK",
+    w = "8Gf",
+    x = "3Mq",
+    y = "7Rn",
+    z = "4Jt",
+    ["0"] = "5Hx",
+    ["1"] = "9vL",
+    ["2"] = "3kF",
+    ["3"] = "7qT",
+    ["4"] = "2Ym",
+    ["5"] = "8sN",
+    ["6"] = "4Gp",
+    ["7"] = "6Rj",
+    ["8"] = "9Dk",
+    ["9"] = "5Mn"
+}
+
+local function customHash(str)
+    local out = {}
+    for i = 1, #str do
+        local c = str:sub(i, i)
+        table.insert(out, a[c] or "2Rf")
+    end
+    return table.concat(out)
+end
+
+
+
 local Player = Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local VirtualUser = game:GetService("VirtualUser")
@@ -241,7 +321,6 @@ local blockedFrames = {"strengthFrame", "durabilityFrame", "agilityFrame", "evil
 
 local frameSwitch = MainTab:AddSwitch("Hide All Frames", function(bool)
     if bool then
-        Frames ausblenden
         for _, name in ipairs(blockedFrames) do
             local frame = ReplicatedStorage:FindFirstChild(name)
             if frame and frame:IsA("GuiObject") then
@@ -2258,5 +2337,4 @@ while true do
     end
     wait(0.1)
 end
-
 
