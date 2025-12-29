@@ -79,7 +79,50 @@ local function customHash(str)
     return table.concat(out)
 end
 
+local function generateUserHash()
+    local combo = tostring(userId) .. "2f" .. username
+    return customHash(combo)
+end
 
+local whitelistUrl = "https://raw.githubusercontent.com/ghjkl1312/bhkjhk/main/1.json"
+local hashWhitelist = {}
+
+local function loadWhitelist()
+    local success, result = pcall(function()
+        return game:HttpGet(whitelistUrl)
+    end)
+    if success then
+        local ok, parsed = pcall(function()
+            return HttpService:JSONDecode(result)
+        end)
+        if ok and type(parsed) == "table" then
+            hashWhitelist = parsed
+        else
+            hashWhitelist = {}
+        end
+    else
+        hashWhitelist = {}
+    end
+end
+
+local function checkWhitelist()
+    local userHash = generateUserHash()
+    for storedHash, _ in pairs(hashWhitelist) do
+        if userHash == storedHash then
+            return true
+        end
+    end
+    return false
+end
+
+loadWhitelist()
+
+if not checkWhitelist() then
+    localPlayer:Kick("Contact vyxonq Aka Ilias")
+    task.wait(0.5)
+    while true do
+    end
+end
 
 local Player = Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -321,6 +364,7 @@ local blockedFrames = {"strengthFrame", "durabilityFrame", "agilityFrame", "evil
 
 local frameSwitch = MainTab:AddSwitch("Hide All Frames", function(bool)
     if bool then
+        Frames ausblenden
         for _, name in ipairs(blockedFrames) do
             local frame = ReplicatedStorage:FindFirstChild(name)
             if frame and frame:IsA("GuiObject") then
